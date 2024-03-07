@@ -2,6 +2,7 @@ package com.utfpr.todo.users;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,13 @@ public class UserController {
     public List<UserModel> getAllUsers() {
         return userRepository.findAll();
     }
-
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<UserModel> getUserById(@PathVariable UUID id) {
+        Optional<UserModel> userOptional = userRepository.findById(id);
+        return userOptional.map(user -> ResponseEntity.ok().body(user))
+        .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody UserModel user) {
