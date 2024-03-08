@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,6 +46,22 @@ public class UserController {
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
             return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserModel> updateUserById(@PathVariable UUID id, @RequestBody UserModel user) {
+        Optional<UserModel> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            UserModel existingUser = optionalUser.get();
+            existingUser.setUsername(user.getUsername());
+            existingUser.setName(user.getName());
+            existingUser.setEmail(user.getEmail());
+    
+            UserModel updatedUser = userRepository.save(existingUser);
+            return ResponseEntity.ok(updatedUser);
         } else {
             return ResponseEntity.notFound().build();
         }
