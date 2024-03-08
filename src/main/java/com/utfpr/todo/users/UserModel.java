@@ -11,12 +11,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 
 
 @Data //create all the most important methods in java
-@Entity(name = "tbl-users")
+@Entity
+@Table(name = "tbl_users")
 public class UserModel {
     
     @Id

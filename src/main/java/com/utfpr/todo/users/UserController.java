@@ -39,6 +39,17 @@ public class UserController {
         .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable UUID id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody UserModel user) {
 
