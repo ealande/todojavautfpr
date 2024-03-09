@@ -3,6 +3,7 @@ package com.utfpr.todo.tasks;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -22,16 +23,24 @@ public class TaskModel {
   @GeneratedValue(generator = "UUID")
   private UUID id;
 
+  // private UUID userId;
+
+  @Column(nullable = false)
   private String title;
 
+  @Column(nullable = false)
   private String description;
 
   private boolean completed;
 
-  private LocalDateTime createdAt;
+  @Column(nullable = false)
+  private String priority;
+
+  // private LocalDateTime startAt;
 
   private LocalDateTime endAt;
 
-  private String priority;
+  // @CreationTimestamp
+  private LocalDateTime createdAt;
 
 }

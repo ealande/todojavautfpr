@@ -17,6 +17,7 @@ public class TaskServiceTest {
   @Mock
   private TaskRepository taskRepository;
 
+  // operação_estado_retorno`
   @Test
   public void createTask_WithValidData_ReturnsTask() {
 

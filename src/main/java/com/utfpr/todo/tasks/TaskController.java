@@ -16,26 +16,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/tasks")
 public class TaskController {
 
-    @Autowired
-    private TaskService taskService;
+  @Autowired
+  private TaskService taskService;
 
-    @PostMapping
-    public ResponseEntity<?> create(@RequestBody TaskModel task) {
+  @PostMapping
+  public ResponseEntity<?> create(@RequestBody TaskModel task) {
 
-        TaskModel createdTask = taskService.create(task);
+    TaskModel createdTask = taskService.create(task);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
+    return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
 
-    }
+  }
 
-    @PatchMapping("{id}complete")
+  @PatchMapping("/{id}/complete")
+  public ResponseEntity<?> complete(@PathVariable UUID id) {
 
-    public ResponseEntity<?> complete(@PathVariable UUID id) {
-        TaskModel updatedTask = taskService.complete(id);
+    TaskModel updatedTask = taskService.complete(id);
 
-        return ResponseEntity.status(HttpStatus.OK).body(updatedTask);
+    return ResponseEntity.status(HttpStatus.OK).body(updatedTask);
 
-
-    }
+  }
 
 }
