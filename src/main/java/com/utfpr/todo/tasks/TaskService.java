@@ -6,23 +6,25 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TaskService {
-    
-    private TaskRepository taskRepository;
 
-    public TaskService(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
-    }
-    
-    public TaskModel create(TaskModel task) {
-        return taskRepository.save(task);
-    }
+  private TaskRepository taskRepository;
 
-    public TaskModel complete(UUID id) {
-        TaskModel task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("task not found"));
+  public TaskService(TaskRepository taskRepository) {
+    this.taskRepository = taskRepository;
+  }
 
-        task.setCompleted(true);
-        
-        return taskRepository.save(task);
-    }
+  public TaskModel create(TaskModel task) {
+    return taskRepository.save(task);
+  }
+
+  public TaskModel complete(UUID id) {
+
+    TaskModel task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+
+    task.setCompleted(true);
+
+    return taskRepository.save(task);
+
+  }
 
 }
