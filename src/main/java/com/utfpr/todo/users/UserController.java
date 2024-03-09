@@ -73,8 +73,7 @@ public class UserController {
         UserModel userModel = userRepository.findByUsername(user.getUsername());
 
         if (userModel != null) {
-            // throw new RuntimeErrorException(null, "Username already exists");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(
                     Collections.singletonMap("error", "Username already exists"));
         }
 

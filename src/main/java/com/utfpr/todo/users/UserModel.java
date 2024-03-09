@@ -18,7 +18,7 @@ import lombok.Data;
 
 @Data //create all the most important methods in java
 @Entity
-@Table(name = "tbl_users")
+@Table(name = "tbl-users")
 public class UserModel {
     
     @Id
