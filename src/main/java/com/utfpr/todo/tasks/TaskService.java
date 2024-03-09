@@ -19,7 +19,9 @@ public class TaskService {
 
     public TaskModel complete(UUID id) {
         TaskModel task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("task not found"));
+
         task.setCompleted(true);
+        
         return taskRepository.save(task);
     }
 
