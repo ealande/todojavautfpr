@@ -12,12 +12,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Data;
 
 
 
 @Data //create all the most important methods in java
 @Entity
+@Builder
 @Table(name = "tbl-users")
 public class UserModel {
     
